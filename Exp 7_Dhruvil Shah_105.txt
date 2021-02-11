@@ -1,0 +1,354 @@
+Experiment 7:- Aim: Write a program to perform different operations on a singly linked list.
+
+Theory:The Linked list is a linear data structure.Unlike arrays, in linked list, the elements are not stored in contiguous memory locations.Instead the elements in a linked list are linked using pointers.
+
+The different operations performed on a linked list are as follows:
+
+1.   Create: Create is an operation that is used to create a constituent node 
+when required in
+a linked list.
+
+2.   Insert: Insert operation is used to insert a new node in a linked list.We 
+can insert an
+element in three cases:
+
+a.    At the beginning
+
+b.   At the end
+
+c.   At any specified position(Middle position)
+
+3.    Delete: Delete operation is used to delete an existing node from a linked 
+list.We can
+delete a node from a linked list in there cases:
+
+a.   From the beginning of the list.
+
+b.   From the end
+
+c.   From any specified position(Middle position)
+
+4.   Display: It is used to display all the nodes present in the linked list.
+
+5.   Search: It is used to find a particular element present in the linked 
+list.
+
+
+#include<stdio.h>
+#include<conio.h>
+
+typedef struct node{
+int data;
+
+struct node *next;
+
+}node;
+
+node *head,*temp,*p;
+
+void createLL(int);
+void insertbeg();
+void insertend();
+
+
+void insertpos();
+void deletebeg();
+void deleteend();
+void deletepos();
+void displayLL();
+
+void main()
+
+{
+
+int n,ch;
+
+printf("\nEnter number of nodes:");
+scanf("%d",&n);
+
+createLL(n);
+do{
+
+printf("\n\n Menu: \n1.Insert at beginning \n2.Insert at end \n3.Insert at 
+position");
+printf("\n4.Delete at begining \n5.Delete at end\n6.Delete at position");
+printf("\n7.Display Linked List \n8.Exit. \nEnter your choice:");
+
+scanf("%d",&ch);
+switch(ch)
+
+{
+
+case 1: insertbeg(); break;
+case 2: insertend(); break;
+case 3: insertpos(); break;
+case 4: deletebeg(); break;
+case 5: deleteend(); break;
+case 6: deletepos(); break;
+case 7: displayLL(); break;
+case 8: break;
+
+default: printf("\nInvalid choice");
+
+}
+
+}while(ch!=8);
+getch();
+
+}
+
+void createLL(int n)
+
+{
+
+int i,val;
+for(i=1;i<=n;i++)
+
+{
+
+temp = (node*)malloc(sizeof(node));
+printf("\nEnter the value:");
+scanf("%d",&val);
+
+temp->data = val;
+temp->next = NULL;
+
+
+if(head==NULL)
+head=temp;
+else
+
+{
+
+p=head;
+
+while(p->next!=NULL)
+p=p->next;
+
+p->next = temp;
+
+}
+
+}
+
+}
+
+void insertbeg()
+
+{int val;
+
+temp = (node*)malloc(sizeof(node));
+printf("\nEnter the value:");
+scanf("%d",&val);
+
+temp->data = val;
+temp->next = NULL;
+if(head==NULL)
+
+head = temp;
+else
+
+{
+
+temp->next = head;
+head = temp;
+
+}
+
+}
+
+void insertend()
+
+{int val;
+
+temp = (node*)malloc(sizeof(node));
+printf("\nEnter the value:");
+scanf("%d",&val);
+
+temp->data = val;
+temp->next = NULL;
+if(head==NULL)
+
+head = temp;
+else
+
+{
+
+p=head;
+
+while(p->next!=NULL)
+p=p->next;
+
+p->next = temp;
+
+}
+
+
+}
+
+void insertpos()
+
+{int val,i,pos;
+
+temp = (node*)malloc(sizeof(node));
+printf("\nEnter the value:");
+scanf("%d",&val);
+
+temp->data = val;
+temp->next = NULL;
+if(head==NULL)
+
+head = temp;
+else
+
+{
+
+printf("Enter the position:");
+scanf("%d",&pos);
+p=head;
+
+for(i=1;i<pos-1;i++)
+p=p->next;
+
+temp->next = p->next;
+p->next = temp;
+
+}
+
+}
+
+void deletebeg()
+
+{
+
+if(head==NULL)
+
+printf("\nLinked list is empty");
+else
+
+{
+
+p = head->next;
+
+printf("\nData Deleted:%d",head->data);
+head->next = NULL;
+
+head = p;
+
+}
+
+}
+
+void deleteend()
+
+{
+
+if(head==NULL)
+
+printf("\nLinked list is empty");
+else
+
+{
+
+p=head;
+
+if(head->next==NULL)
+
+{
+
+printf("\nOnly one node with data %d is deleted",head->data);
+
+
+head = NULL;
+
+}
+
+else
+
+{
+
+while(p->next->next!=NULL)
+p=p->next;
+
+printf("\nData Deleted:%d",p->next->data);
+p->next = NULL;
+
+}
+
+}
+
+}
+
+void deletepos()
+
+{ int i,pos;
+if(head==NULL)
+
+printf("\nLinked list is empty");
+
+else
+
+{
+
+if(head->next==NULL)
+
+{
+
+printf("\nOnly one node with data %d is deleted",head->data);
+head=NULL;
+
+}
+
+else
+
+{
+
+printf("\nEnter the position:");
+scanf("%d",&pos);
+
+p=head;
+for(i=1;i<pos-1;i++)
+
+p=p->next;
+
+printf("\nData Deleted:%d",p->next->data);
+
+temp = p->next;
+
+p->next = temp->next;
+temp->next = NULL;
+
+}
+
+}
+
+}
+
+void displayLL()
+
+{
+
+if(head==NULL)
+printf("\nLinked list is empty");
+else
+
+
+{
+
+p=head;
+
+printf("\nOur Linked list: ");
+while(p!=NULL)
+
+{
+
+printf("%d->",p->data);
+p=p->next;
+
+}
+
+printf("NULL");
+
+}
+
+}
